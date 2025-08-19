@@ -1,1 +1,3 @@
-# recipe-explorer-8696
+# Project Repository
+
+This is the initial README file for the project.
