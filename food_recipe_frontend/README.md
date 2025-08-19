@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Recipe Explorer Frontend (Next.js)
 
-## Getting Started
+Modern, light-themed, responsive UI for browsing, searching, filtering, viewing, and saving favorite food recipes.
 
-First, run the development server:
+## Features
+- Browse recipes in a responsive grid
+- Search and filter by cuisine, category, tags, and max cooking time
+- View recipe details with ingredients and instructions
+- Save/remove favorites (stored in localStorage)
+- Pagination
+- Modern light UI using Tailwind CSS v4
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Environment
+Create a `.env.local` at repository root with:
+```
+NEXT_PUBLIC_API_BASE_URL=https://your-backend-host/api
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app expects backend REST endpoints:
+- GET `${NEXT_PUBLIC_API_BASE_URL}/recipes?q&cuisine&category&maxTime&tags&page&pageSize`
+  - Response: `{ items: Recipe[], total: number, page: number, pageSize: number }`
+- GET `${NEXT_PUBLIC_API_BASE_URL}/recipes/:id`
+  - Response: `Recipe`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Develop
+```
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000
 
-## Learn More
+## Build
+```
+npm run build
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
+- src/lib/api.ts: REST client and types
+- src/lib/favorites.ts: local favorites store
+- src/components/*: UI components (header, filters, grid, pagination)
+- src/app/page.tsx: browse/search/filter page
+- src/app/recipe/[id]/page.tsx: recipe detail
+- src/app/favorites/page.tsx: favorites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Design
+Palette:
+- primary: #4caf50
+- secondary: #ff9800
+- accent: #e91e63
+Light theme, clean spacing, bordered cards, subtle shadows.
